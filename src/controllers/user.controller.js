@@ -188,7 +188,7 @@ const refreshAccessToekn = asyncHandler(async(req, res) => {
     )
   }
 })
-export { registerUser, loginUser, logoutUser, refreshAccessToekn }
+export { registerUser, loginUser, logoutUser, refreshAccessToekn  }
 
 
 
