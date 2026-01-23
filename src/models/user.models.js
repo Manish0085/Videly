@@ -62,7 +62,7 @@ userSchema.pre("save", async function (next) {
 )
 
 userSchema.methods.isPasswordCorrect = async function 
-(params) {
+(password) {
     return await brycpt.compare(password, this.password);
 }
 
