@@ -52,15 +52,51 @@ This project follows a layered architecture designed for separation of concerns 
 
 ```mermaid
 graph TD
-    Client[Client (React SPA)] -->|HTTPS / JSON| LB[Load Balancer / Gateway]
-    LB --> API[Spring Boot Application]
+    Client[📱 Client (React SPA)]
+    LB[🌐 API Gateway / Load Balancer]
     
-    subgraph "Backend Infrastructure"
-    API -->|Auth & Logic| Service[Service Layer]
-    Service -->|Read/Write Hot Data| Redis[(Redis Cache)]
-    Service -->|Persist Data| DB[(MongoDB Cluster)]
-    Service -->|Store Media| Cloud[Cloudinary CDN]
+    subgraph "Backend Infrastructure (Spring Boot)"
+        Controller[🎮 REST Controllers]
+        Security[🔒 Spring Security / JWT]
+        Service[⚙️ Service Layer]
+        Repo[💾 Repository Layer]
     end
+
+    Redis[(⚡ Redis Cache\nHot Data & Sessions)]
+    DB[(🍃 MongoDB\nUsers, Videos, Metadata)]
+    Cloud[☁️ Cloudinary\nVideo & Image Storage]
+
+    Client -->|HTTPS / JSON| LB
+    LB --> Security
+    Security --> Controller
+    Controller --> Service
+    
+    Service -->|1. Check Cache| Redis
+    Redis -->|2. Cache Hit| Service
+    Service -->|3. Cache Miss| Repo
+    Repo -->|4. Fetch Data| DB
+    DB --> Repo
+    Service -->|5. Update Cache| Redis
+    
+    Service -->|Upload/Stream| Cloud
+```
+
+```mermaid
+sequenceDiagram
+    participant User as 👤 User
+    participant Frontend as 💻 Frontend
+    participant API as ⚙️ Backend API
+    participant CDN as ☁️ Cloudinary CDN
+    participant DB as 🍃 Database
+
+    User->>Frontend: Clicks Play Video
+    Frontend->>API: GET /videos/{id}
+    API->>DB: Fetch Video Metadata
+    DB-->>API: Returns Title, URL, Stats
+    API-->>Frontend: Returns Video Data (CDN URL)
+    Frontend->>CDN: Request Video Stream (HLS/MP4)
+    CDN-->>Frontend: Streams Video Chunks
+    Frontend-->>User: Plays Video
 ```
 
 ### 🧠 **Why Redis?**
