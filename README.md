@@ -51,34 +51,35 @@
 This project follows a layered architecture designed for separation of concerns and scalability.
 
 ```mermaid
-graph TD
-    Client[📱 Client (React SPA)]
-    LB[🌐 API Gateway / Load Balancer]
-    
-    subgraph "Backend Infrastructure (Spring Boot)"
-        Controller[🎮 REST Controllers]
-        Security[🔒 Spring Security / JWT]
-        Service[⚙️ Service Layer]
-        Repo[💾 Repository Layer]
+flowchart TD
+    Client["Client (React SPA)"]
+    LB["API Gateway / Load Balancer"]
+
+    subgraph Backend["Backend Infrastructure (Spring Boot)"]
+        Security["Spring Security (JWT)"]
+        Controller["REST Controllers"]
+        Service["Service Layer"]
+        Repo["Repository Layer"]
     end
 
-    Redis[(⚡ Redis Cache\nHot Data & Sessions)]
-    DB[(🍃 MongoDB\nUsers, Videos, Metadata)]
-    Cloud[☁️ Cloudinary\nVideo & Image Storage]
+    Redis["Redis Cache (Hot Data & Sessions)"]
+    DB["MongoDB (Users, Videos, Metadata)"]
+    Cloud["Cloudinary (Video & Image Storage)"]
 
     Client -->|HTTPS / JSON| LB
     LB --> Security
     Security --> Controller
     Controller --> Service
-    
-    Service -->|1. Check Cache| Redis
-    Redis -->|2. Cache Hit| Service
-    Service -->|3. Cache Miss| Repo
-    Repo -->|4. Fetch Data| DB
+
+    Service -->|Check Cache| Redis
+    Redis -->|Cache Hit| Service
+    Service -->|Cache Miss| Repo
+    Repo --> DB
     DB --> Repo
-    Service -->|5. Update Cache| Redis
-    
-    Service -->|Upload/Stream| Cloud
+    Service -->|Update Cache| Redis
+
+    Service -->|Upload / Stream| Cloud
+
 ```
 
 ```mermaid
@@ -111,15 +112,10 @@ In a video streaming platform, read operations (viewing videos, profiles, commen
 
 <!-- Add your screenshots here in the /screenshots folder and link them below -->
 
-| **Home Page (Responsive Grid)** | **Shorts Player (Mobile Style)** |
-|:------------------------------:|:--------------------------------:|
-| ![Home Page](path/to/home-screenshot.png) | ![Shorts Player](path/to/shorts-screenshot.png) |
-| *Adaptive grid layout* | *Immersive vertical scrolling* |
-
-| **Search & Discovery** | **Video Player** |
-|:----------------------:|:----------------:|
-| ![Search](path/to/search-screenshot.png) | ![Player](path/to/player-screenshot.png) |
-| *Fast, cached search results* | *Cinematic playback experience* |
+| **Home Page (Responsive Grid)** |
+|:------------------------------:|
+| ![Home Page](path/to/home-screenshot.png) |
+| *Adaptive grid layout across devices* |
 
 ---
 
