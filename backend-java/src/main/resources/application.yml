@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: videostreaming
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000
+      cache-null-values: false
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  main:
+    allow-circular-references: true
+
+server:
+  port: ${PORT:8081}
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:1d}
+  refresh-secret: ${JWT_REFRESH_SECRET}
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:10d}
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+
+app:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS}
