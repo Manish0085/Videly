@@ -118,3 +118,11 @@ dist
 .pnp.*
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node
+.vscode
+/backend-java/.env
+/backend-java/current_log.txt
+/backend-java/server_log.txt
+/backend-java/server_response.txt
+/backend-java/startup_debug.log
+/backend-java/target
+/frontend/node_modules

@@ -1,0 +1,398 @@
+:root {
+  --bg: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --primary: #FF0000;
+  --primary-glow: rgba(255, 0, 0, 0.4);
+  --white: #ffffff;
+  --text-main: #ffffff;
+  --text-secondary: #aaaaaa;
+  --border: rgba(255, 255, 255, 0.1);
+  --card-bg: #1e1e1e;
+  --hover: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --gradient-dark: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  --accent-gradient: linear-gradient(90deg, #FF0000 0%, #FF4D4D 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', 'Inter', 'Roboto', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(255, 0, 0, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(255, 0, 0, 0.03) 0px, transparent 50%);
+  color: var(--text-main);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.pill-btn {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  gap: 0.5rem;
+  border: 1px solid var(--glass-border);
+}
+
+.pill-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.subscribe-btn {
+  background: white;
+  color: black;
+  padding: 0.6rem 1.4rem;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.subscribe-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.subscribe-btn.subscribed {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid var(--glass-border);
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+}
+
+.container {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-field {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  padding: 0.9rem 1.2rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+
+.error-text {
+  color: #ff4d4d;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   RESPONSIVE MEDIA QUERIES
+   ============================================ */
+
+/* Mobile Phones (Portrait) */
+@media (max-width: 480px) {
+
+  /* Typography */
+  html {
+    font-size: 14px;
+  }
+
+  /* Header adjustments */
+  header {
+    padding: 0 0.5rem !important;
+  }
+
+  /* Hide search on very small screens */
+  form {
+    display: none !important;
+  }
+
+  /* Main content */
+  main {
+    margin-left: 0 !important;
+    padding: 0.75rem !important;
+  }
+
+  /* Video grid responsive */
+  .video-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Buttons */
+  button {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+/* Mobile Phones & Small Tablets (Landscape/Portrait) */
+@media (max-width: 768px) {
+
+  /* Sidebar should be hidden or overlay */
+  aside {
+    position: fixed !important;
+    z-index: 90;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  aside.open {
+    transform: translateX(0);
+  }
+
+  /* Main content takes full width */
+  main {
+    margin-left: 0 !important;
+    padding: 1rem !important;
+  }
+
+  /* Header search smaller */
+  form {
+    max-width: 300px !important;
+    margin: 0 0.5rem !important;
+  }
+
+  /* Video grid */
+  .video-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 1rem !important;
+  }
+
+  /* Hide some UI elements */
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  main {
+    margin-left: 72px !important;
+  }
+
+  .video-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  }
+
+  form {
+    max-width: 400px !important;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .video-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1441px) {
+  .video-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
+  }
+
+  main {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Orientation specific */
+@media (orientation: landscape) and (max-height: 600px) {
+
+  /* Optimize for landscape mobile */
+  header {
+    height: 48px !important;
+  }
+}
+
+/* Watch Video Page Responsive */
+.watch-video-container {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  /* Default Desktop */
+  gap: 1.5rem;
+  max-width: 1700px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .watch-video-container {
+    grid-template-columns: 1fr;
+    /* Stack on tablet/mobile */
+  }
+}
+
+/* Channel Profile Responsive */
+.channel-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .channel-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .channel-header img {
+    margin: 0 auto;
+  }
+
+  .channel-header h1 {
+    font-size: 1.8rem !important;
+  }
+
+  .channel-actions {
+    justify-content: center;
+  }
+}
+
+.channel-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem 1.5rem;
+  padding: 2rem 0;
+}
+
+.channel-shorts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+@media (max-width: 480px) {
+  .channel-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .channel-shorts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
