@@ -114,7 +114,7 @@ In a video streaming platform, read operations (viewing videos, profiles, commen
 
 | **Home Page (Responsive Grid)** |
 |:------------------------------:|
-| ![Home Page](path/to/home-screenshot.png) |
+| ![Home Page](image.png) |
 | *Adaptive grid layout across devices* |
 
 ---
