@@ -131,7 +131,7 @@ const WatchVideo = () => {
 
     if (loading) return <div style={{ color: 'white', textAlign: 'center', marginTop: '4rem' }}>
         <div className="spinner"></div>
-        <p style={{ marginTop: '1rem' }}>Loading StreamBox...</p>
+        <p style={{ marginTop: '1rem' }}>Loading Videly...</p>
     </div>;
 
     if (!video) return <div style={{ color: 'white', textAlign: 'center', marginTop: '4rem' }}>Video not found</div>;

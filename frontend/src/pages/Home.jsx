@@ -94,7 +94,7 @@ function Home() {
     if (loading) {
         return <div style={{ color: 'white', textAlign: 'center', marginTop: '4rem' }}>
             <div style={{ width: '40px', height: '40px', border: '4px solid #333', borderTop: '4px solid #fff', borderRadius: '50%', animation: 'spin 1s linear infinite', margin: '0 auto' }}></div>
-            <p style={{ marginTop: '1rem' }}>Loading StreamBox...</p>
+            <p style={{ marginTop: '1rem' }}>Loading Videly...</p>
             <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
         </div>;
     }

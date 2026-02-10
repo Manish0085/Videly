@@ -51,7 +51,7 @@ function Header({ toggleSidebar }) {
                     <div style={{ background: 'var(--primary)', width: '30px', height: '22px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <FaPlay size={10} style={{ marginLeft: '2px', color: 'white' }} />
                     </div>
-                    <span style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '-0.5px', color: 'white' }}>StreamBox</span>
+                    <span style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '-0.5px', color: 'white' }}>Videly</span>
                 </Link>
             </div>
 
