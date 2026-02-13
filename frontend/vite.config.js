@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'https://videly-x9ek.onrender.com',
         changeOrigin: true,
         secure: false,
       },
