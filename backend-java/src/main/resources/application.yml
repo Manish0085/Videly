@@ -7,9 +7,9 @@ spring:
       uri: ${MONGODB_URI}
 
     redis:
-      uri: ${REDIS_URI}
       host: ${REDIS_HOST}
-      port: ${REDIS_PORT:6379}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
 
   cache:
     type: redis
