@@ -6,17 +6,10 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/Manish0085/Videly.git',
-                    credentialsId: 'github-pat'
-            }
-        }
 
         stage('Install Dependencies') {
             steps {
-                dir('Stream-frontend/frontend') {
+                dir('frontend') {
                     sh '''
                     node -v
                     npm -v
@@ -28,7 +21,7 @@ pipeline {
 
         stage('Build Project') {
             steps {
-                dir('Stream-frontend/frontend') {
+                dir('frontend') {
                     sh 'npm run build'
                 }
             }
@@ -36,7 +29,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                dir('Stream-frontend/frontend') {
+                dir('frontend') {
                     sh '''
                     sudo rm -rf /var/www/html/*
                     sudo cp -r dist/* /var/www/html/
@@ -50,6 +43,9 @@ pipeline {
     post {
         success {
             echo '🎉 Deployment Successful!'
+        }
+        failure {
+            echo '❌ Deployment Failed'
         }
     }
 }
