@@ -5,60 +5,51 @@ pipeline {
         nodejs 'node18'
     }
 
-    environment {
-        DEPLOY_DIR = "/var/www/videly-frontend"
-    }
-
     stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/Manish0085/Videly.git',
+                    credentialsId: 'github-pat'
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
-                dir('frontend') {
+                dir('Stream-frontend/frontend') {
                     sh '''
                     node -v
                     npm -v
-
-                    if [ -f package-lock.json ]; then
-                      npm ci
-                    else
-                      npm install
-                    fi
+                    npm install
                     '''
                 }
             }
         }
 
-        stage('Build Frontend') {
+        stage('Build Project') {
             steps {
-                dir('frontend') {
+                dir('Stream-frontend/frontend') {
                     sh 'npm run build'
                 }
             }
         }
 
-        stage('Deploy Frontend') {
+        stage('Deploy') {
             steps {
-                sh '''
-                if [ ! -d frontend/dist ]; then
-                  echo "❌ Build failed: dist folder not found"
-                  exit 1
-                fi
-
-                sudo mkdir -p ${DEPLOY_DIR}
-                sudo rm -rf ${DEPLOY_DIR}/*
-                sudo cp -r frontend/dist/* ${DEPLOY_DIR}/
-                sudo chown -R www-data:www-data ${DEPLOY_DIR}
-                '''
+                dir('Stream-frontend/frontend') {
+                    sh '''
+                    sudo rm -rf /var/www/html/*
+                    sudo cp -r dist/* /var/www/html/
+                    sudo systemctl reload nginx
+                    '''
+                }
             }
         }
     }
 
     post {
         success {
-            echo '🎉 Frontend deployed successfully!'
-        }
-        failure {
-            echo '❌ Frontend deployment failed'
+            echo '🎉 Deployment Successful!'
         }
     }
 }
