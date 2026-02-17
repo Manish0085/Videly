@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://videly-x9ek.onrender.com',
+        target: 'https://videly.duckdns.org',
         changeOrigin: true,
         secure: false,
       },

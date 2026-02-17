@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://videly-x9ek.onrender.com/api/v1',
+    baseURL: 'https://videly.duckdns.org/api/v1',
     withCredentials: true, // Send cookies with requests
     headers: {
         'Content-Type': 'application/json',
