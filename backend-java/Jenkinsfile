@@ -24,9 +24,11 @@ pipeline {
 
         stage('Build Backend') {
             steps {
-                sh '''
-                mvn clean package -DskipTests
-                '''
+                dir('backend-java') {
+                    sh '''
+                    mvn clean package -DskipTests
+                    '''
+                }
             }
         }
 
@@ -34,7 +36,7 @@ pipeline {
             steps {
                 sh '''
                 sudo mkdir -p ${DEPLOY_DIR}
-                sudo cp target/*.jar ${DEPLOY_DIR}/${JAR_NAME}
+                sudo cp backend-java/target/*.jar ${DEPLOY_DIR}/${JAR_NAME}
                 '''
             }
         }
