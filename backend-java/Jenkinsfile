@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk17'
+        maven 'maven'
+    }
+
+    environment {
+        APP_NAME   = "video-streaming-backend"
+        DEPLOY_DIR = "/opt/apps"
+        JAR_NAME   = "video-streaming-backend.jar"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/Manish0085/Videly.git',
+                    credentialsId: 'github-pat'
+            }
+        }
+
+        stage('Build Backend') {
+            steps {
+                dir('backend') {
+                    sh '''
+                    mvn clean package -DskipTests
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy Backend') {
+            steps {
+                sh '''
+                sudo mkdir -p ${DEPLOY_DIR}
+                sudo cp backend-java/target/*.jar ${DEPLOY_DIR}/${JAR_NAME}
+                '''
+            }
+        }
+
+        stage('Restart Backend Service') {
+            steps {
+                sh '''
+                sudo systemctl daemon-reload
+                sudo systemctl restart ${APP_NAME}
+                sudo systemctl status ${APP_NAME} --no-pager
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '🎉 Backend Deployment Successful!'
+        }
+        failure {
+            echo '❌ Backend Deployment Failed'
+        }
+    }
+}
