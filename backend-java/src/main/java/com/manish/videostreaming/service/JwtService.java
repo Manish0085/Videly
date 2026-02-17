@@ -18,16 +18,16 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret:dummy}")
     private String secretKey;
 
-    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration:1d}")
     private String jwtExpiration; // in milliseconds
 
-    @Value("${jwt.refresh-secret}")
+    @Value("${jwt.refresh-secret:dummy}")
     private String refreshSecretKey;
 
-    @Value("${jwt.refresh-expiration}")
+    @Value("${jwt.refresh-expiration:1d}")
     private String refreshJwtExpiration;
 
     public long getExpirationInMillis(String expiration) {
